@@ -206,9 +206,9 @@ setInterval(function(){
     setTimeout(gRemove, 15000)
 },100000)
 
-makeButton(300, 50, null, 200, 0, null, "Puppies "+pups+" $1k", "pupbut", pupUp);
-makeButton(300, 50, null, 100, 0, null, "Miners "+dminer+" $5", 0, minerUp);
-makeButton(300, 50, null, 150, 0, null, "Factories "+facts+" $50", "factbut",factUp);
+makeButton(300, 50, null, 250, 0, null, "Puppies "+pups+" $1k", "pupbut", pupUp);
+makeButton(300, 50, null, 150, 0, null, "Miners "+dminer+" $5", 0, minerUp);
+makeButton(300, 50, null, 200, 0, null, "Factories "+facts+" $50", "factbut",factUp);
 
 //doge click button
 d = document.createElement("div"); 
@@ -239,9 +239,9 @@ c.addEventListener("click", minerUp);
 document.body.append(c);
 
 makeButton(300, 50, null, 0, 0, null, "Save Game", "savebut", saveGame);
-makeButton(300, 50, null, 0, 300, null, "Reset Progress", "reset", reset);
-makeButton(150, 50, null, 50, 450, null, "Yes", "resetYes", resetYes);
-makeButton(150, 50, null, 50, 300, null, "No", "resetNo", resetNo);
+makeButton(300, 50, null, 50, 0, null, "Reset Progress", "reset", reset);
+makeButton(150, 50, null, 100, 150, null, "Yes", "resetYes", resetYes);
+makeButton(150, 50, null, 100, 0, null, "No", "resetNo", resetNo);
 var resetYes = document.getElementById("resetYes");
 resetYes.style.visibility = "hidden";
 var resetNo = document.getElementById('resetNo');
