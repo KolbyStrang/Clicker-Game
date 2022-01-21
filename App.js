@@ -1,17 +1,27 @@
 var dcoin = 0;
 var dminer = 0;
 var facts = 0;
+var pups = 0;
 var pbooster = 1;
 var cbooster = 1;
 
 if(null != localStorage.getItem("myData")){
-var retrievedDataString = localStorage.getItem("myData");
-console.log("hi data"+retrievedDataString);
-var retrievedData = JSON.parse(retrievedDataString);
-var splitSave = retrievedData.split('*');
-dcoin = Number(splitSave[0]);
-dminer = Number(splitSave[1]);
-facts = Number(splitSave[2]);
+    var retrievedDataString = localStorage.getItem("myData");
+    console.log("hi data"+retrievedDataString);
+    var retrievedData = JSON.parse(retrievedDataString);
+    var splitSave = retrievedData.split('*');
+    if(null != Number(splitSave[0])){
+        dcoin = Number(splitSave[0]);
+    }
+    if(null != Number(splitSave[1])){
+        dminer = Number(splitSave[1]);
+    }
+    if(null != Number(splitSave[2])){
+        facts = Number(splitSave[2]);
+    }
+    if(null != Number(splitSave[3])){
+        pups = Number(splitSave[3]);
+    }
 }
 
 
@@ -60,7 +70,7 @@ function makeButton(dx, dy, left, top, right, bottom, text, id, func){
     document.body.append(b); 
 }
 function saveGame(){
-    myData =dcoin +"*"+ dminer +"*"+ facts;
+    myData =dcoin +"*"+ dminer +"*"+ facts +"*"+pups;
     localStorage.setItem("myData", JSON.stringify(myData));
     savebut = document.getElementById("savebut");
     savebut.innerHTML = "Game Saved";
@@ -82,6 +92,11 @@ function pRun(){
     abprice = abbreviateNumber(price);
     var abfacts = abbreviateNumber(facts);
     fact.innerHTML = "Factories "+abfacts+" $"+abprice;
+    var pup = document.getElementById('pupbut');
+    price = (pups + 1)* 1000
+    abprice = abbreviateNumber(price);
+    var abpups = abbreviateNumber(pups);
+    pup.innerHTML = "Puppies "+abpups+" $"+abprice;
 }
 function gboost(){
     var gdoge = document.getElementById('gdoge');
@@ -117,6 +132,7 @@ function resetYes(){
     dcoin = 0;
     dminer = 0;
     facts = 0;
+    pups = 0;
     pRun();
 }
 function resetNo(){
@@ -156,9 +172,23 @@ function factUp(){
         pRun();
     }
 }
+function pupUp(){
+    var price = (pups + 1) * 1000;
+    if (price <= dcoin){
+        pups += 1;
+        var b = document.getElementById("pupbut");
+        dcoin -= price;
+        price = (pups + 1) * 1000;
+        var abprice = abbreviateNumber(price);
+        var abpups = abbreviateNumber(pups);
+        b.innerHTML = "Puppies " + abpups +" $"+ abprice;
+        pRun();
+    }
+}
 //background loop for passive stuff
 setInterval(function() {
     var doge = facts * 10;
+    doge += pups * 100
     dcoin += doge * pbooster;
     pRun();
 }, 1000);
@@ -175,7 +205,9 @@ setInterval(function(){
     document.body.append(goldDoge); 
     setTimeout(gRemove, 15000)
 },100000)
-makeButton(300, 50,null, 100, 0,null,"Miners     "+dminer+"     $5", 0, minerUp);
+
+makeButton(300, 50, null, 200, 0, null, "Puppies "+pups+" $1k", "pupbut", pupUp);
+makeButton(300, 50, null, 100, 0, null, "Miners "+dminer+" $5", 0, minerUp);
 makeButton(300, 50, null, 150, 0, null, "Factories "+facts+" $50", "factbut",factUp);
 
 //doge click button
