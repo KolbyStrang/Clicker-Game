@@ -1,13 +1,14 @@
+console.log('A fun doodle of a game made by Kolby Strang')
 var dcoin = 0;
 var dminer = 0;
 var facts = 0;
 var pups = 0;
 var pbooster = 1;
 var cbooster = 1;
+var purchmult = 1;
 
 if(null != localStorage.getItem("myData")){
     var retrievedDataString = localStorage.getItem("myData");
-    console.log("hi data"+retrievedDataString);
     var retrievedData = JSON.parse(retrievedDataString);
     var splitSave = retrievedData.split('*');
     if(null != Number(splitSave[0])){
@@ -36,6 +37,36 @@ e.style.top = "0px";
 e.id = 'background'; 
 document.body.append(e); 
 //check / useful functions
+function multi1(){
+    var purch1 = document.getElementById("multi1");
+    var purch10 = document.getElementById("multi10");
+    var purch100 = document.getElementById("multi100");
+    purch1.style.backgroundColor = "green";
+    purch10.style.backgroundColor = "grey";
+    purch100.style.backgroundColor = "grey";
+    purchmult = 1;
+    pRun();
+}
+function multi10(){
+    var purch1 = document.getElementById("multi1");
+    var purch10 = document.getElementById("multi10");
+    var purch100 = document.getElementById("multi100");
+    purch1.style.backgroundColor = "grey";
+    purch10.style.backgroundColor = "green";
+    purch100.style.backgroundColor = "grey";
+    purchmult = 10;
+    pRun();
+}
+function multi100(){
+    var purch1 = document.getElementById("multi1");
+    var purch10 = document.getElementById("multi10");
+    var purch100 = document.getElementById("multi100");
+    purch1.style.backgroundColor = "grey";
+    purch10.style.backgroundColor = "grey";
+    purch100.style.backgroundColor = "green";
+    purchmult = 100;
+    pRun();
+}
 function abbreviateNumber(value) {
     var newValue = value;
     if (value >= 1000) {
@@ -85,16 +116,17 @@ function pRun(){
     c.innerHTML = "DogeCoin     "+ abdcoin;
     var miner = document.getElementById('0');
     var price = (dminer + 1)*5
-    var abprice = abbreviateNumber(price);
-    miner.innerHTML = "Miners     "+dminer+" $"+abprice;
+    var abdminer = abbreviateNumber(dminer)
+    var abprice = abbreviateNumber(price * purchmult);
+    miner.innerHTML = "Miners     "+abdminer+" $"+abprice;
     var fact = document.getElementById('factbut');
     price = (facts + 1)*50
-    abprice = abbreviateNumber(price);
+    abprice = abbreviateNumber(price * purchmult);
     var abfacts = abbreviateNumber(facts);
-    fact.innerHTML = "Factories "+abfacts+" $"+abprice;
+    fact.innerHTML = "Factory "+abfacts+" $"+abprice;
     var pup = document.getElementById('pupbut');
     price = (pups + 1)* 1000
-    abprice = abbreviateNumber(price);
+    abprice = abbreviateNumber(price* purchmult);
     var abpups = abbreviateNumber(pups);
     pup.innerHTML = "Puppies "+abpups+" $"+abprice;
 }
@@ -109,7 +141,7 @@ function gboost(){
 function boostStop(){
     pbooster = 1;
     cbooster = 1;
-    c.style.backgroundColor = "#063970";
+    c.style.backgroundColor = "#grey";
 }
 function gRemove(){
     var gdoge = document.getElementById('gdoge');
@@ -143,14 +175,15 @@ function resetNo(){
 }
 //utility check functions
 function minerUp(){
-    var price = (dminer + 1) * 5;
+    var price = purchmult*((dminer + 1) * 5);
     if (price <= dcoin){
-        dminer += 1;
+        dminer += purchmult;
         var b = document.getElementById(0);
         dcoin -= price;
         price = (dminer + 1) * 5;
+        var abdminer = abbreviateNumber(dminer);
         var abprice = abbreviateNumber(price);
-        b.innerHTML = "Miners     " + dminer +"     $"+abprice;
+        b.innerHTML = "Miners     " + abdminer +"     $"+abprice;
         pRun();
     }
 }
@@ -160,22 +193,22 @@ function dogeUp(){
     c.innerHTML = "DogeCoin     "+ abdcoin;
 }
 function factUp(){
-    var price = (facts + 1) * 50;
+    var price = purchmult*((facts + 1) * 50);
     if (price <= dcoin){
-        facts += 1;
+        facts += purchmult;
         var b = document.getElementById("factbut");
         dcoin -= price;
         price = (facts + 1) * 50;
         var abprice = abbreviateNumber(price);
         var abfacts = abbreviateNumber(facts);
-        b.innerHTML = "Factories " + abfacts +" $"+ abprice;
+        b.innerHTML = "Factory " + abfacts +" $"+ abprice;
         pRun();
     }
 }
 function pupUp(){
-    var price = (pups + 1) * 1000;
+    var price = purchmult*((pups + 1) * 1000);
     if (price <= dcoin){
-        pups += 1;
+        pups += purchmult;
         var b = document.getElementById("pupbut");
         dcoin -= price;
         price = (pups + 1) * 1000;
@@ -206,9 +239,9 @@ setInterval(function(){
     setTimeout(gRemove, 15000)
 },100000)
 
-makeButton(300, 50, null, 250, 0, null, "Puppies "+pups+" $1k", "pupbut", pupUp);
-makeButton(300, 50, null, 150, 0, null, "Miners "+dminer+" $5", 0, minerUp);
-makeButton(300, 50, null, 200, 0, null, "Factories "+facts+" $50", "factbut",factUp);
+makeButton(300, 50, null, 300, 0, null, "Puppies "+pups+" $1k", "pupbut", pupUp);
+makeButton(300, 50, null, 200, 0, null, "Miners "+dminer+" $5", 0, minerUp);
+makeButton(300, 50, null, 250, 0, null, "Factory "+facts+" $50", "factbut",factUp);
 
 //doge click button
 d = document.createElement("div"); 
@@ -246,3 +279,8 @@ var resetYes = document.getElementById("resetYes");
 resetYes.style.visibility = "hidden";
 var resetNo = document.getElementById('resetNo');
 resetNo.style.visibility = "hidden";
+makeButton(100, 50, null, 150, 0, null, "1x", "multi1", multi1);
+makeButton(100, 50, null, 150, 100, null, "10x", "multi10", multi10);
+makeButton(100, 50, null, 150, 200, null, "100x", "multi100", multi100);
+var purch1 = document.getElementById("multi1");
+purch1.style.backgroundColor = "green";
