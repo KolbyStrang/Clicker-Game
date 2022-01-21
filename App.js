@@ -4,13 +4,14 @@ var facts = 0;
 var pbooster = 1;
 var cbooster = 1;
 
-
+if(null != localStorage.getItem("myData")){
 var retrievedDataString = localStorage.getItem("myData");
 var retrievedData = JSON.parse(retrievedDataString);
 var splitSave = retrievedData.split('*');
 dcoin = Number(splitSave[0]);
 dminer = Number(splitSave[1]);
 facts = Number(splitSave[2]);
+}
 
 
 //wallpaper
