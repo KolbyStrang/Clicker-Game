@@ -6,7 +6,7 @@ var cbooster = 1;
 
 if(null != localStorage.getItem("myData")){
 var retrievedDataString = localStorage.getItem("myData");
-console.log(retrievedDataString);
+console.log("hi data"+retrievedDataString);
 var retrievedData = JSON.parse(retrievedDataString);
 var splitSave = retrievedData.split('*');
 dcoin = Number(splitSave[0]);
