@@ -141,7 +141,7 @@ function gboost(){
 function boostStop(){
     pbooster = 1;
     cbooster = 1;
-    c.style.backgroundColor = "#grey";
+    c.style.backgroundColor = "grey";
 }
 function gRemove(){
     var gdoge = document.getElementById('gdoge');
