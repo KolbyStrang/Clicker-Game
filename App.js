@@ -80,7 +80,8 @@ function pRun(){
     var fact = document.getElementById('factbut');
     price = (facts + 1)*50
     abprice = abbreviateNumber(price);
-    fact.innerHTML = "Factories "+facts+" $"+abprice;
+    var abfacts = abbreviateNumber(facts);
+    fact.innerHTML = "Factories "+abfacts+" $"+abprice;
 }
 function gboost(){
     var gdoge = document.getElementById('gdoge');
@@ -150,7 +151,8 @@ function factUp(){
         dcoin -= price;
         price = (facts + 1) * 50;
         var abprice = abbreviateNumber(price);
-        b.innerHTML = "Factories " + facts +" $"+ abprice;
+        var abfacts = abbreviateNumber(facts);
+        b.innerHTML = "Factories " + abfacts +" $"+ abprice;
         pRun();
     }
 }
