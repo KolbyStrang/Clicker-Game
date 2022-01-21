@@ -163,11 +163,14 @@ setInterval(function() {
 setInterval(function(){
     var x = Math.floor(Math.random()*1310);
     var y = Math.floor(Math.random()*650);
-    makeButton(40, 40, x, y, null, null, null, "gdoge", gboost);
-    var dbooster = document.getElementById('gdoge');
-    dbooster.style.backgroundColor = null;
-    dbooster.style.border = null;
-    dbooster.innerHTML +='<img src= Photos/Doge.png />';
+    goldDoge = document.createElement("div"); 
+    goldDoge.style.position = "absolute"; 
+    goldDoge.style.left = x+"px"; 
+    goldDoge.style.top = y+"px"; 
+    goldDoge.id = 'gdoge'; 
+    goldDoge.innerHTML +='<img src= Photos/GDoge.png />';
+    goldDoge.addEventListener("click", gboost); 
+    document.body.append(goldDoge); 
     setTimeout(gRemove, 15000)
 },100000)
 makeButton(300, 50,null, 100, 0,null,"Miners     "+dminer+"     $5", 0, minerUp);
