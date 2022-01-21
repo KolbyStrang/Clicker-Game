@@ -159,7 +159,8 @@ setInterval(function() {
 setInterval(function(){
     var x = Math.floor(Math.random()*1310);
     var y = Math.floor(Math.random()*650);
-    var dbooster = makeButton(40, 40, x, y, null, null, null, "gdoge", gboost);
+    makeButton(40, 40, x, y, null, null, null, "gdoge", gboost);
+    var dbooster = document.getElementById('gdoge');
     dbooster.style.backgroundColor = null;
     dbooster.style.border = null;
     dbooster.innerHTML +='<img src= Photos/Doge.png />';
