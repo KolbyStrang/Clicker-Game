@@ -47,7 +47,7 @@ function makeButton(dx, dy, left, top, right, bottom, text, id, func){
     b.style.border = "black solid thin"; 
     b.style.width = dx+"px"; 
     b.style.height = dy+"px"; 
-    b.style.backgroundColor = "#063970"; 
+    b.style.backgroundColor = "grey"; 
     b.style.position = "absolute"; 
     b.style.left = left+"px"; 
     b.style.top = top+"px"; 
@@ -195,7 +195,7 @@ c = document.createElement("div");
 c.style.border = "black solid thin"; 
 c.style.width = "500px"; 
 c.style.height = "80px"; 
-c.style.backgroundColor = "#063970"; 
+c.style.backgroundColor = "grey"; 
 c.style.position = "absolute"; 
 c.style.left = "100px"; 
 c.style.top = "0px"; 
