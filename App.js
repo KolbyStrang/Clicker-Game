@@ -3,6 +3,8 @@ var dminer = 0;
 var facts = 0;
 var pbooster = 1;
 var cbooster = 1;
+
+
 var retrievedDataString = localStorage.getItem("myData");
 var retrievedData = JSON.parse(retrievedDataString);
 var splitSave = retrievedData.split('*');
