@@ -6,22 +6,26 @@ var pups = 0;
 var pbooster = 1;
 var cbooster = 1;
 var purchmult = 1;
+var musks = 0;
 
 if(null != localStorage.getItem("myData")){
     var retrievedDataString = localStorage.getItem("myData");
     var retrievedData = JSON.parse(retrievedDataString);
     var splitSave = retrievedData.split('*');
-    if(null != Number(splitSave[0])){
+    if(0 < Number(splitSave[0])){
         dcoin = Number(splitSave[0]);
     }
-    if(null != Number(splitSave[1])){
+    if(0 < Number(splitSave[1])){
         dminer = Number(splitSave[1]);
     }
-    if(null != Number(splitSave[2])){
+    if(0 < Number(splitSave[2])){
         facts = Number(splitSave[2]);
     }
-    if(null != Number(splitSave[3])){
+    if(0 < Number(splitSave[3])){
         pups = Number(splitSave[3]);
+    }
+    if(0 < Number(splitSave[4])){
+        musks = Number(splitSave[4]);
     }
 }
 
@@ -101,7 +105,7 @@ function makeButton(dx, dy, left, top, right, bottom, text, id, func){
     document.body.append(b); 
 }
 function saveGame(){
-    myData =dcoin +"*"+ dminer +"*"+ facts +"*"+pups;
+    myData =dcoin +"*"+ dminer +"*"+ facts +"*"+pups+"*"+musks;
     localStorage.setItem("myData", JSON.stringify(myData));
     savebut = document.getElementById("savebut");
     savebut.innerHTML = "Game Saved";
@@ -129,6 +133,12 @@ function pRun(){
     abprice = abbreviateNumber(price* purchmult);
     var abpups = abbreviateNumber(pups);
     pup.innerHTML = "Puppies "+abpups+" $"+abprice;
+    var musk = document.getElementById('muskbut');
+    price = (musks + 1)* 1000000
+    abprice = abbreviateNumber(price* purchmult);
+    var abmusks = abbreviateNumber(musks);
+    musk.innerHTML = "Elon Musk "+abmusks+" $"+abprice;
+
 }
 function gboost(){
     var gdoge = document.getElementById('gdoge');
@@ -165,6 +175,7 @@ function resetYes(){
     dminer = 0;
     facts = 0;
     pups = 0;
+    musks = 0;
     pRun();
 }
 function resetNo(){
@@ -218,10 +229,24 @@ function pupUp(){
         pRun();
     }
 }
+function muskUp(){
+    var price = purchmult*((musks + 1) * 1000000);
+    if (price <= dcoin){
+        musks += purchmult;
+        var b = document.getElementById("muskbut");
+        dcoin -= price;
+        price = (musks + 1) * 1000000;
+        var abprice = abbreviateNumber(price);
+        var abmusks = abbreviateNumber(musks);
+        b.innerHTML = "Elon Musks " + abmusks +" $"+ abprice;
+        pRun();
+    }
+}
 //background loop for passive stuff
 setInterval(function() {
     var doge = facts * 10;
     doge += pups * 100
+    doge += musks * 1000
     dcoin += doge * pbooster;
     pRun();
 }, 1000);
@@ -242,7 +267,7 @@ setInterval(function(){
 makeButton(300, 50, null, 300, 0, null, "Puppies "+pups+" $1k", "pupbut", pupUp);
 makeButton(300, 50, null, 200, 0, null, "Miners "+dminer+" $5", 0, minerUp);
 makeButton(300, 50, null, 250, 0, null, "Factory "+facts+" $50", "factbut",factUp);
-
+makeButton(300, 50, null, 350, 0, null, "Elon Musk "+musks+" $1m", "muskbut", muskUp);
 //doge click button
 d = document.createElement("div"); 
 d.innerHTML += '<img src= Photos/Doge.png />';
