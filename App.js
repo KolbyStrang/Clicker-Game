@@ -172,7 +172,7 @@ function pRun(){
     var abpups = abbreviateNumber(pups);
     pup.innerHTML = "Puppies "+abpups+" $"+abprice;
     var musk = document.getElementById('muskbut');
-    price = (musks + 1)* 1000000
+    price = (musks + 1)* 300000
     abprice = abbreviateNumber(price* purchmult);
     var abmusks = abbreviateNumber(musks);
     musk.innerHTML = "Elon Musk "+abmusks+" $"+abprice;
@@ -268,12 +268,12 @@ function pupUp(){
     }
 }
 function muskUp(){
-    var price = purchmult*((musks + 1) * 1000000);
+    var price = purchmult*((musks + 1) * 300000);
     if (price <= dcoin){
         musks += purchmult;
         var b = document.getElementById("muskbut");
         dcoin -= price;
-        price = (musks + 1) * 1000000;
+        price = (musks + 1) * 300000;
         var abprice = abbreviateNumber(price);
         var abmusks = abbreviateNumber(musks);
         b.innerHTML = "Elon Musks " + abmusks +" $"+ abprice;
