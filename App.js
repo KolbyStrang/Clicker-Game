@@ -137,7 +137,7 @@ function makeButton(dx, dy, left, top, right, bottom, text, id, func){
     b.style.bottom = bottom+"px"; 
     b.innerHTML = text;
     b.id = id; 
-    b.style.fontSize = "2em";
+    b.style.fontSize = "1.9em";
     b.addEventListener("click", func); 
     document.body.append(b);
     return(b); 
@@ -237,7 +237,7 @@ function minerUp(){
     }
 }
 function dogeUp(){
-    dcoin += cbooster * (dminer + 1);
+    dcoin += (rebirths+1)*(cbooster * (dminer + 1));
     var abdcoin = abbreviateNumber(dcoin);
     c.innerHTML = "DogeCoin     "+ abdcoin;
 }
