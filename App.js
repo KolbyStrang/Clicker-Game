@@ -57,14 +57,14 @@ function rebirth(){
     b = document.getElementById("rebirthBackground");
     var rebirthmult = 1+(rebirths/2);
     var doge = ((facts * 10) + (pups * 100) + (musks * 1000)) * (1 + (rebirths / 2));
-    b.innerHTML = "You have "+rebirths+" rebirths! <br> <br> Your cash multiplier is "+ rebirthmult +"<br> <br> You need "+(1+rebirths) * 20000+" DogeCoin per second to rebirth. <br> <br> You have are earning "+ doge +" per second.";
+    b.innerHTML = "You have "+rebirths+" rebirths! <br> <br> Your cash multiplier is x"+ rebirthmult +"<br> <br> You need to earn "+(1+rebirths) * 20000+" DogeCoin per second to rebirth. <br> <br> You have are earning "+ doge +" DogeCoin per second.";
 }
 function openRebirth(){
     b = document.getElementById("rebirthBackground");
     b.style.visibility = null;
     var rebirthmult = 1+(rebirths/2);
     var doge = ((facts * 10) + (pups * 100) + (musks * 1000)) * (1 + (rebirths / 2));
-    b.innerHTML = "You have "+rebirths+" rebirths! <br> <br> Your cash multiplier is "+ rebirthmult +"<br> <br> You need "+(1+rebirths) * 20000+" DogeCoin per second to rebirth. <br> <br> You have are earning "+ doge +" per second.";
+    b.innerHTML = "You have "+rebirths+" rebirths! <br> <br> Your cash multiplier is x"+ rebirthmult +"<br> <br> You need to earn "+(1+rebirths) * 20000+" DogeCoin per second to rebirth. <br> <br> You have are earning "+ doge +" DogeCoin per second.";
     b = document.getElementById('XRebirth');
     b.style.visibility = null;
     b = document.getElementById('rebirthButton')
