@@ -47,17 +47,21 @@ e.id = 'background';
 document.body.append(e); 
 //check / useful functions
 function rebirth(){
-    dcoin = 0;
-    dminer = 0;
-    facts = 0;
-    pups = 0;
-    musks = 0;
-    rebirths++;
-    pRun();
-    b = document.getElementById("rebirthBackground");
-    var rebirthmult = 1+(rebirths/2);
     var doge = ((facts * 10) + (pups * 100) + (musks * 1000)) * (1 + (rebirths / 2));
-    b.innerHTML = "You have "+rebirths+" rebirths! <br> <br> Your cash multiplier is x"+ rebirthmult +"<br> <br> You need to earn "+(1+rebirths) * 20000+" DogeCoin per second to rebirth. <br> <br> You have are earning "+ doge +" DogeCoin per second.";
+    if(doge > (1+rebirths) * 20000){
+        dcoin = 0;
+        dminer = 0;
+        facts = 0;
+        pups = 0;
+        musks = 0;
+        rebirths++;
+        pRun();
+        b = document.getElementById("rebirthBackground");
+        var rebirthmult = 1+(rebirths/2);
+        var doge = ((facts * 10) + (pups * 100) + (musks * 1000)) * (1 + (rebirths / 2));
+        b.innerHTML = "You have "+rebirths+" rebirths! <br> <br> Your cash multiplier is x"+ rebirthmult +"<br> <br> You need to earn "+(1+rebirths) * 20000+" DogeCoin per second to rebirth. <br> <br> You have are earning "+ doge +" DogeCoin per second.";
+
+    }
 }
 function openRebirth(){
     b = document.getElementById("rebirthBackground");
