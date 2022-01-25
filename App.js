@@ -7,6 +7,8 @@ var pbooster = 1;
 var cbooster = 1;
 var purchmult = 1;
 var musks = 0;
+var rebirths = 0;
+var doge = 0;
 
 if(null != localStorage.getItem("myData")){
     var retrievedDataString = localStorage.getItem("myData");
@@ -27,6 +29,9 @@ if(null != localStorage.getItem("myData")){
     if(0 < Number(splitSave[4])){
         musks = Number(splitSave[4]);
     }
+    if(0 < Number(splitSave[5])){
+        rebirths = Number(splitSave[5]);
+    }
 }
 
 
@@ -41,6 +46,38 @@ e.style.top = "0px";
 e.id = 'background'; 
 document.body.append(e); 
 //check / useful functions
+function rebirth(){
+    dcoin = 0;
+    dminer = 0;
+    facts = 0;
+    pups = 0;
+    musks = 0;
+    rebirths++;
+    pRun();
+    b = document.getElementById("rebirthBackground");
+    var rebirthmult = 1+(rebirths/2);
+    var doge = ((facts * 10) + (pups * 100) + (musks * 1000)) * (1 + (rebirths / 2));
+    b.innerHTML = "You have "+rebirths+" rebirths! <br> <br> Your cash multiplier is "+ rebirthmult +"<br> <br> You need "+(1+rebirths) * 20000+" DogeCoin per second to rebirth. <br> <br> You have are earning "+ doge +" per second.";
+}
+function openRebirth(){
+    b = document.getElementById("rebirthBackground");
+    b.style.visibility = null;
+    var rebirthmult = 1+(rebirths/2);
+    var doge = ((facts * 10) + (pups * 100) + (musks * 1000)) * (1 + (rebirths / 2));
+    b.innerHTML = "You have "+rebirths+" rebirths! <br> <br> Your cash multiplier is "+ rebirthmult +"<br> <br> You need "+(1+rebirths) * 20000+" DogeCoin per second to rebirth. <br> <br> You have are earning "+ doge +" per second.";
+    b = document.getElementById('XRebirth');
+    b.style.visibility = null;
+    b = document.getElementById('rebirthButton')
+    b.style.visibility = null;
+}
+function closeRebirth(){
+    b = document.getElementById("rebirthBackground");
+    b.style.visibility = "hidden";
+    b = document.getElementById('XRebirth');
+    b.style.visibility = "hidden";
+    b = document.getElementById('rebirthButton')
+    b.style.visibility = 'hidden';
+}
 function multi1(){
     var purch1 = document.getElementById("multi1");
     var purch10 = document.getElementById("multi10");
@@ -102,10 +139,11 @@ function makeButton(dx, dy, left, top, right, bottom, text, id, func){
     b.id = id; 
     b.style.fontSize = "2em";
     b.addEventListener("click", func); 
-    document.body.append(b); 
+    document.body.append(b);
+    return(b); 
 }
 function saveGame(){
-    myData =dcoin +"*"+ dminer +"*"+ facts +"*"+pups+"*"+musks;
+    myData = +dcoin +"*"+ dminer +"*"+ facts +"*"+pups+"*"+musks+"*"+rebirths;
     localStorage.setItem("myData", JSON.stringify(myData));
     savebut = document.getElementById("savebut");
     savebut.innerHTML = "Game Saved";
@@ -138,7 +176,6 @@ function pRun(){
     abprice = abbreviateNumber(price* purchmult);
     var abmusks = abbreviateNumber(musks);
     musk.innerHTML = "Elon Musk "+abmusks+" $"+abprice;
-
 }
 function gboost(){
     var gdoge = document.getElementById('gdoge');
@@ -176,6 +213,7 @@ function resetYes(){
     facts = 0;
     pups = 0;
     musks = 0;
+    rebirths = 0;
     pRun();
 }
 function resetNo(){
@@ -245,8 +283,9 @@ function muskUp(){
 //background loop for passive stuff
 setInterval(function() {
     var doge = facts * 10;
-    doge += pups * 100
-    doge += musks * 1000
+    doge += pups * 100;
+    doge += musks * 1000;
+    doge *= 1 + (rebirths / 2) 
     dcoin += doge * pbooster;
     pRun();
 }, 1000);
@@ -268,6 +307,7 @@ makeButton(300, 50, null, 300, 0, null, "Puppies "+pups+" $1k", "pupbut", pupUp)
 makeButton(300, 50, null, 200, 0, null, "Miners "+dminer+" $5", 0, minerUp);
 makeButton(300, 50, null, 250, 0, null, "Factory "+facts+" $50", "factbut",factUp);
 makeButton(300, 50, null, 350, 0, null, "Elon Musk "+musks+" $1m", "muskbut", muskUp);
+
 //doge click button
 d = document.createElement("div"); 
 d.innerHTML += '<img src= Photos/Doge.png />';
@@ -309,3 +349,18 @@ makeButton(100, 50, null, 150, 100, null, "10x", "multi10", multi10);
 makeButton(100, 50, null, 150, 200, null, "100x", "multi100", multi100);
 var purch1 = document.getElementById("multi1");
 purch1.style.backgroundColor = "green";
+//rebirth button
+makeButton(448, 82, 600, 0, null, null, 'Rebirths', 'rebirthmenubutton', openRebirth);
+b.style.backgroundColor = 'gold';
+b.style.fontSize = "4em";
+//rebirth menu builder
+makeButton(500, 600, 400, 25, null, null, null, 'rebirthBackground', null);
+b.style.visibility = "hidden";
+makeButton(25, 25, 870, 30, null, null, "X", "XRebirth", closeRebirth);
+b.style.backgroundColor = "red";
+b.style.fontSize = ".5em";
+b.style.visibility = "hidden";
+makeButton(150, 50, 575, 500, null, null, "Rebirth!", "rebirthButton", rebirth);
+b.style.backgroundColor = "gold";
+b.style.visibility = "hidden";
+
