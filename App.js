@@ -46,6 +46,13 @@ e.style.top = "0px";
 e.id = 'background'; 
 document.body.append(e); 
 //check / useful functions
+function settingsOpen(){
+    if('pissword' == prompt("Whats the admin password?"))
+        b = document.getElementById("settingsBackground");
+        b.style.visibility = null;
+        b = document.getElementById('XSettings');
+        b.style.visibility = null;
+}
 function rebirth(){
     var doge = ((facts * 10) + (pups * 100) + (musks * 1000)) * (1 + (rebirths / 2));
     if(doge > (1+rebirths) * 20000){
@@ -73,6 +80,12 @@ function openRebirth(){
     b.style.visibility = null;
     b = document.getElementById('rebirthButton')
     b.style.visibility = null;
+}
+function closeSettings(){
+    b = document.getElementById("settingsBackground");
+    b.style.visibility = 'hidden';
+    b = document.getElementById('XSettings');
+    b.style.visibility = 'hidden';
 }
 function closeRebirth(){
     b = document.getElementById("rebirthBackground");
@@ -379,3 +392,25 @@ makeButton(150, 50, 575, 500, null, null, "Rebirth!", "rebirthButton", rebirth);
 b.style.backgroundColor = "gold";
 b.style.visibility = "hidden";
 
+//settings button
+s = document.createElement("div"); 
+s.innerHTML += '<img src= Photos/Settings.png />';
+s.style.width = "100px"; 
+s.style.height = "100px"; 
+s.style.position = "absolute"; 
+s.style.left = "0px"; 
+s.style.top = "0px"; 
+s.id = 'settingsButton'; 
+s.addEventListener("click", settingsOpen); 
+document.body.append(s); 
+
+//settings menu builder
+makeButton(500, 600, 400, 25, null, null, null, 'settingsBackground', null);
+b.style.visibility = "hidden";
+makeButton(25, 25, 870, 30, null, null, "X", "XSettings", closeSettings);
+b.style.backgroundColor = "red";
+b.style.fontSize = ".5em";
+b.style.visibility = "hidden";
+
+//for updates and notices
+alert('This is a game made by Kolby Stang in Timberline high school and im just playing around, if youd like to suggest something to be added just come tell me and ill work on it and im going to be making changelogs in this alert everytime you refresh the browser, i just added a settings menu that is for me and some other dev tools so its password protected')
