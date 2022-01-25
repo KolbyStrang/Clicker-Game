@@ -240,6 +240,17 @@ function dogeUp(){
     dcoin += (rebirths+1)*(cbooster * (dminer + 1));
     var abdcoin = abbreviateNumber(dcoin);
     c.innerHTML = "DogeCoin     "+ abdcoin;
+    d.innerHTML = '<img src= Photos/DogeClicked.png />';
+    d.style.position = "absolute"; 
+    d.style.left = "105px"; 
+    d.style.top = "105px"; 
+    setTimeout(dogeButtonRevert, 10);
+}
+function dogeButtonRevert(){
+    d.innerHTML = '<img src= Photos/Doge.png />';
+    d.style.position = "absolute"; 
+    d.style.left = "100px"; 
+    d.style.top = "100px"; 
 }
 function factUp(){
     var price = purchmult*((facts + 1) * 50);
