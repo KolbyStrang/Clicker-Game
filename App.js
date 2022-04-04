@@ -75,7 +75,8 @@ function openRebirth(){
     b.style.visibility = null;
     var rebirthmult = 1+(rebirths/2);
     var doge = ((facts * 10) + (pups * 100) + (musks * 1000)) * (1 + (rebirths / 2));
-    b.innerHTML = "You have "+rebirths+" rebirths! <br> <br> Your cash multiplier is x"+ rebirthmult +"<br> <br> You need to earn "+(1+rebirths) * 20000+" DogeCoin per second to rebirth. <br> <br> You have are earning "+ doge +" DogeCoin per second.";
+    var abdoge = abbreviateNumber(doge);
+    b.innerHTML = "You have "+rebirths+" rebirths! <br> <br> Your cash multiplier is x"+ rebirthmult +"<br> <br> You need to earn "+abbreviateNumber((1+rebirths) * 20000)+" DogeCoin per second to rebirth. <br> <br> You are earning "+ abdoge +" DogeCoin per second.";
     b = document.getElementById('XRebirth');
     b.style.visibility = null;
     b = document.getElementById('rebirthButton')
@@ -126,9 +127,10 @@ function multi100(){
     pRun();
 }
 function abbreviateNumber(value) {
+    //NOT MY CODE
     var newValue = value;
     if (value >= 1000) {
-        var suffixes = ["", "k", "m", "b","t"];
+    var suffixes = ["", "k", "m", "b","t", "AF", "AG", "AH", "AI", "AJ", "AK", "AL", "AM"];
         var suffixNum = Math.floor( (""+value).length/3 );
         var shortValue = '';
         for (var precision = 2; precision >= 1; precision--) {
@@ -161,6 +163,7 @@ function makeButton(dx, dy, left, top, right, bottom, text, id, func){
 }
 function saveGame(){
     myData = +dcoin +"*"+ dminer +"*"+ facts +"*"+pups+"*"+musks+"*"+rebirths;
+    //NOT MY CODE
     localStorage.setItem("myData", JSON.stringify(myData));
     savebut = document.getElementById("savebut");
     savebut.innerHTML = "Game Saved";
@@ -388,7 +391,7 @@ makeButton(25, 25, 870, 30, null, null, "X", "XRebirth", closeRebirth);
 b.style.backgroundColor = "red";
 b.style.fontSize = ".5em";
 b.style.visibility = "hidden";
-makeButton(150, 50, 575, 500, null, null, "Rebirth!", "rebirthButton", rebirth);
+makeButton(150, 50, 575, 5, null, null, "Rebirth!", "rebirthButton", rebirth);
 b.style.backgroundColor = "gold";
 b.style.visibility = "hidden";
 
@@ -413,4 +416,4 @@ b.style.fontSize = ".5em";
 b.style.visibility = "hidden";
 
 //for updates and notices
-alert('This is a game made by Kolby Stang in Timberline high school and im just playing around, if youd like to suggest something to be added just come tell me and ill work on it and im going to be making changelogs in this alert everytime you refresh the browser, i just added a settings menu that is for me and some other dev tools so its password protected')
+alert('This is a game made by Kolby Stang in Timberline high school and im just playing around, if youd like to suggest something to be added just come tell me and ill work on it and im going to be making changelogs in this alert everytime you refresh the browser, i just added a settings menu that is for me and some other dev tools so its password protected Version 0.1')
